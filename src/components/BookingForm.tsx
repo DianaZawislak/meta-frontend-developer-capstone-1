@@ -10,7 +10,7 @@ import {
   TimeIcon,
 } from "src/components/icons";
 import { useBookingForm } from "src/hooks";
-import { Action, ActionTypes } from "src/reducer";
+import { Action, ActionTypes } from "src/store/reducers";
 import data from "src/data/form-data.json";
 
 const labelProps = {

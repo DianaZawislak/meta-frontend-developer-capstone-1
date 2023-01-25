@@ -18,7 +18,7 @@ import {
 } from "src/components/icons";
 import { useBookingForm } from "src/hooks";
 import { dateFormatter } from "src/utils";
-import { Action, ActionTypes } from "src/reducer";
+import { Action, ActionTypes } from "src/store/reducers";
 
 const labelProps = {
   c: colors.light,

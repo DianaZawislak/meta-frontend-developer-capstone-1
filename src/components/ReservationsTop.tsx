@@ -2,7 +2,7 @@ import * as React from "react";
 import { Box, Container, Title } from "@mantine/core";
 import { BookingForm, SubmitForm } from "src/components";
 import { colors } from "src/theme";
-import { Action } from "src/reducer";
+import { Action } from "src/store/reducers";
 
 interface ReservationsTopProps {
   confirm?: boolean;

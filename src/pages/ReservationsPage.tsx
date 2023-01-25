@@ -4,7 +4,7 @@ import { ReservationsBottom, ReservationsTop } from "src/components";
 import { colors } from "src/theme";
 import { BookingFormValues, useBookingForm } from "src/hooks";
 import { bookingFormValidation } from "src/validations";
-import { initializeTimes, ActionTypes, reducer } from "src/reducer";
+import { initializeTimes, ActionTypes, reducer } from "src/store/reducer";
 import { showNotification } from "@mantine/notifications";
 import { IconCheck, IconX } from "@tabler/icons";
 

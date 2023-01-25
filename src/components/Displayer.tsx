@@ -2,7 +2,7 @@ import * as React from "react";
 import { Box, Center, Group, Text } from "@mantine/core";
 import { IconAlertTriangle } from "@tabler/icons";
 import { colors } from "src/theme";
-import { Action, ActionTypes } from "src/reducer";
+import { Action, ActionTypes } from "src/store/reducers";
 
 interface DisplayerProps {
   error?: boolean;

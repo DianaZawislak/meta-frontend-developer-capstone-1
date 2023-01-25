@@ -1,4 +1,5 @@
 import { fetchAPI } from "src/apis";
+import { ActionTypes } from "src/store/actions";
 
 export type Action<T> = {
   type: string;
@@ -12,12 +13,6 @@ export type State = {
 };
 
 export type ReturnState = { [type: string]: State };
-
-export const enum ActionTypes {
-  CHANGE_DATE = "CHANGE_DATE",
-  SWITCH_CONFIRM = "SWITCH_CONFIRM",
-  SENDING_DATA = "SENDING_DATA",
-}
 
 export const initializeTimes = () => {
   const date = new Date();

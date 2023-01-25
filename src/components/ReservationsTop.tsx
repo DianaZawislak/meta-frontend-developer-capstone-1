@@ -8,7 +8,7 @@ interface ReservationsTopProps {
   confirm?: boolean;
   sending?: boolean;
   availableTimes: string[];
-  dispatch: React.Dispatch<Action>;
+  dispatch: React.Dispatch<Action<string>>;
 }
 
 const ReservationsTop: React.FC<ReservationsTopProps> = ({

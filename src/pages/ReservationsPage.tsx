@@ -4,12 +4,7 @@ import { ReservationsBottom, ReservationsTop } from "src/components";
 import { colors } from "src/theme";
 import { BookingFormValues, useBookingForm } from "src/hooks";
 import { bookingFormValidation } from "src/validations";
-import {
-  initializeTimes,
-  SENDING_DATA,
-  SWITCH_CONFIRM,
-  reducer,
-} from "src/reducer";
+import { initializeTimes, ActionTypes, reducer } from "src/reducer";
 import { showNotification } from "@mantine/notifications";
 import { IconCheck, IconX } from "@tabler/icons";
 
@@ -62,7 +57,7 @@ const ReservationsPage = () => {
 
   const submitForm = () => {
     if (form.validate().hasErrors) {
-      dispatch({ type: SENDING_DATA });
+      dispatch({ type: ActionTypes.SENDING_DATA });
       showNotification({
         title: "Incomplete info!",
         message: "Make sure to fill all the required fields.",
@@ -100,7 +95,7 @@ const ReservationsPage = () => {
             onClick={
               !state.confirm
                 ? () => {
-                    dispatch({ type: SWITCH_CONFIRM });
+                    dispatch({ type: ActionTypes.SWITCH_CONFIRM });
                   }
                 : submitForm
             }

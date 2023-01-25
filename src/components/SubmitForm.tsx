@@ -18,7 +18,7 @@ import {
 } from "src/components/icons";
 import { useBookingForm } from "src/hooks";
 import { dateFormatter } from "src/utils";
-import { Action, SWITCH_CONFIRM } from "src/reducer";
+import { Action, ActionTypes } from "src/reducer";
 
 const labelProps = {
   c: colors.light,
@@ -36,7 +36,7 @@ const useStyles = createStyles((theme) => ({
 
 const SubmitForm: React.FC<{
   sending?: boolean;
-  dispatch: React.Dispatch<Action>;
+  dispatch: React.Dispatch<Action<string>>;
 }> = ({ sending, dispatch }) => {
   const { classes, cx } = useStyles();
   const { useFormContext } = useBookingForm();
@@ -196,7 +196,7 @@ const SubmitForm: React.FC<{
                 onClick={
                   !form.values.seating
                     ? () => {
-                        dispatch({ type: SWITCH_CONFIRM });
+                        dispatch({ type: ActionTypes.SWITCH_CONFIRM });
                       }
                     : () => {}
                 }

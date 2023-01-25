@@ -1,8 +1,8 @@
 import { fetchAPI } from "src/apis";
 
-export type Action = {
+export type Action<T> = {
   type: string;
-  payload?: string;
+  payload?: T;
 };
 
 export type State = {
@@ -11,29 +11,40 @@ export type State = {
   sending: boolean;
 };
 
-export const CHANGE_DATE = "CHANGE_DATE";
-export const SWITCH_CONFIRM = "SWITCH_CONFIRM";
-export const SENDING_DATA = "SENDING_DATA";
+export type ReturnState = { [type: string]: State };
+
+export const enum ActionTypes {
+  CHANGE_DATE = "CHANGE_DATE",
+  SWITCH_CONFIRM = "SWITCH_CONFIRM",
+  SENDING_DATA = "SENDING_DATA",
+}
 
 export const initializeTimes = () => {
   const date = new Date();
   return fetchAPI(date);
 };
 
-export const reducer = (state: State, action: Action) => {
-  const date = action.payload ? new Date(action.payload) : new Date();
+export const updateTimes = (payload: string | undefined) => {
+  const date = payload ? new Date(payload) : new Date();
 
-  if (action.type === CHANGE_DATE) {
-    return { ...state, availableTimes: fetchAPI(date) };
-  }
+  return fetchAPI(date);
+};
 
-  if (action.type === SWITCH_CONFIRM) {
-    return { ...state, confirm: !state.confirm };
-  }
+export const reducer = (state: State, action: Action<string>) => {
+  const states: ReturnState = {
+    [ActionTypes.CHANGE_DATE]: {
+      ...state,
+      availableTimes: updateTimes(action.payload),
+    },
+    [ActionTypes.SWITCH_CONFIRM]: {
+      ...state,
+      confirm: !state.confirm,
+    },
+    [ActionTypes.SENDING_DATA]: {
+      ...state,
+      sending: true,
+    },
+  };
 
-  if (action.type === SENDING_DATA) {
-    return { ...state, sending: true };
-  }
-
-  return { ...state };
+  return action.type ? states[action.type] : { ...state };
 };

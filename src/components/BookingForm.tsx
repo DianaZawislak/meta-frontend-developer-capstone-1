@@ -10,7 +10,7 @@ import {
   TimeIcon,
 } from "src/components/icons";
 import { useBookingForm } from "src/hooks";
-import { Action, CHANGE_DATE } from "src/reducer";
+import { Action, ActionTypes } from "src/reducer";
 import data from "src/data/form-data.json";
 
 const labelProps = {
@@ -31,7 +31,7 @@ const Chevron: React.FC<{ value: Date | string | null | undefined }> = ({
 
 interface BookingFormProps {
   availableTimes: string[];
-  dispatch: React.Dispatch<Action>;
+  dispatch: React.Dispatch<Action<string>>;
 }
 
 const BookingForm: React.FC<BookingFormProps> = ({
@@ -55,7 +55,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
   );
 
   React.useEffect(() => {
-    dispatch({ type: CHANGE_DATE, payload: form.values.date });
+    dispatch({ type: ActionTypes.CHANGE_DATE, payload: form.values.date });
   }, [form.values.date]);
 
   return (

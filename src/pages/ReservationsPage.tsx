@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Button, Center, createStyles } from "@mantine/core";
-import { ReservationsBottom, ReservationsTop } from "src/components";
-import { colors } from "src/theme";
-import { BookingFormValues, useBookingForm } from "src/hooks";
-import { bookingFormValidation } from "src/validations";
-import { initializeTimes, ActionTypes, reducer } from "src/reducer";
 import { showNotification } from "@mantine/notifications";
 import { IconCheck, IconX } from "@tabler/icons";
+import { ReservationsBottom, ReservationsTop } from "src/components";
+import { StateContext } from "src/context";
+import { BookingFormValues, useBookingForm } from "src/hooks";
+import { bookingFormValidation } from "src/validations";
+import { colors } from "src/theme";
 
 const useStyles = createStyles((theme) => ({
   button: {
@@ -28,11 +28,8 @@ const images = [
 
 const ReservationsPage = () => {
   const { classes } = useStyles();
-  const [state, dispatch] = React.useReducer(reducer, {
-    confirm: false,
-    availableTimes: initializeTimes(),
-    sending: false,
-  });
+  const { confirm, handleSwitchConfirmation, handleSendData } =
+    React.useContext(StateContext);
 
   const { FormProvider, useForm } = useBookingForm();
 
@@ -57,7 +54,7 @@ const ReservationsPage = () => {
 
   const submitForm = () => {
     if (form.validate().hasErrors) {
-      dispatch({ type: ActionTypes.SENDING_DATA });
+      handleSendData();
       showNotification({
         title: "Incomplete info!",
         message: "Make sure to fill all the required fields.",
@@ -77,12 +74,7 @@ const ReservationsPage = () => {
   return (
     <>
       <FormProvider form={form}>
-        <ReservationsTop
-          confirm={state.confirm}
-          availableTimes={state.availableTimes}
-          sending={state.sending}
-          dispatch={dispatch}
-        />
+        <ReservationsTop confirm={confirm} />
         <Center my="xl">
           <Button
             size="md"
@@ -92,21 +84,15 @@ const ReservationsPage = () => {
             w={300}
             className={classes.button}
             type="submit"
-            onClick={
-              !state.confirm
-                ? () => {
-                    dispatch({ type: ActionTypes.SWITCH_CONFIRM });
-                  }
-                : submitForm
-            }
+            onClick={!confirm ? handleSwitchConfirmation : submitForm}
           >
-            {!state.confirm ? "Reserve a Table" : "Confirm Rservation"}
+            {!confirm ? "Reserve a Table" : "Confirm Reservation"}
           </Button>
         </Center>
       </FormProvider>
 
       <ReservationsBottom
-        images={!state.confirm ? images.slice(0, 3) : images.slice(3, 6)}
+        images={!confirm ? images.slice(0, 3) : images.slice(3, 6)}
       />
     </>
   );

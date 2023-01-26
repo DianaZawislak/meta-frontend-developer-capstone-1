@@ -9,8 +9,8 @@ import {
   OccasionIcon,
   TimeIcon,
 } from "src/components/icons";
+import { StateContext } from "src/context";
 import { useBookingForm } from "src/hooks";
-import { Action, ActionTypes } from "src/reducer";
 import data from "src/data/form-data.json";
 
 const labelProps = {
@@ -29,15 +29,8 @@ const Chevron: React.FC<{ value: Date | string | null | undefined }> = ({
   );
 };
 
-interface BookingFormProps {
-  availableTimes: string[];
-  dispatch: React.Dispatch<Action<string>>;
-}
-
-const BookingForm: React.FC<BookingFormProps> = ({
-  availableTimes,
-  dispatch,
-}) => {
+const BookingForm = () => {
+  const { availableTimes, handleUpdateTimes } = React.useContext(StateContext);
   const { useFormContext } = useBookingForm();
   const form = useFormContext();
 
@@ -55,7 +48,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
   );
 
   React.useEffect(() => {
-    dispatch({ type: ActionTypes.CHANGE_DATE, payload: form.values.date });
+    handleUpdateTimes(form.values.date);
   }, [form.values.date]);
 
   return (

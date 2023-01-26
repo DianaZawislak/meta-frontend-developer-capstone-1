@@ -18,7 +18,7 @@ import {
 } from "src/components/icons";
 import { useBookingForm } from "src/hooks";
 import { dateFormatter } from "src/utils";
-import { Action, ActionTypes } from "src/store/reducers";
+import { StateContext } from "src/context";
 
 const labelProps = {
   c: colors.light,
@@ -34,11 +34,9 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const SubmitForm: React.FC<{
-  sending?: boolean;
-  dispatch: React.Dispatch<Action<string>>;
-}> = ({ sending, dispatch }) => {
+const SubmitForm = () => {
   const { classes, cx } = useStyles();
+  const { sending, handleSwitchConfirmation } = React.useContext(StateContext);
   const { useFormContext } = useBookingForm();
   const form = useFormContext();
 
@@ -131,7 +129,6 @@ const SubmitForm: React.FC<{
               value={dateFormatter(form.values.date)}
               extraValue="Select Date"
               error={!form.values.date}
-              dispatch={dispatch}
               icon={
                 <DateIcon
                   value={!form.values.date}
@@ -146,7 +143,6 @@ const SubmitForm: React.FC<{
               value={form.values.guests}
               extraValue="Select Diners"
               error={!form.values.guests}
-              dispatch={dispatch}
               icon={
                 <DinersIcon
                   value={!form.values.guests}
@@ -161,7 +157,6 @@ const SubmitForm: React.FC<{
               value={form.values.time}
               extraValue="Select Time"
               error={!form.values.time}
-              dispatch={dispatch}
               icon={
                 <TimeIcon
                   value={!form.values.time}
@@ -176,7 +171,6 @@ const SubmitForm: React.FC<{
               value={form.values.occasion}
               extraValue="Select Occasion"
               error={!form.values.occasion}
-              dispatch={dispatch}
               icon={
                 <OccasionIcon
                   value={!form.values.occasion}
@@ -194,11 +188,7 @@ const SubmitForm: React.FC<{
                 c={form.values.seating ? colors.light : colors.pink}
                 sx={{ cursor: !form.values.seating ? "pointer" : "text" }}
                 onClick={
-                  !form.values.seating
-                    ? () => {
-                        dispatch({ type: ActionTypes.SWITCH_CONFIRM });
-                      }
-                    : () => {}
+                  !form.values.seating ? handleSwitchConfirmation : () => {}
                 }
               >
                 {form.values.seating

@@ -1,15 +1,14 @@
 import * as React from "react";
 import { Box, Center, Group, Text } from "@mantine/core";
 import { IconAlertTriangle } from "@tabler/icons";
+import { StateContext } from "src/context";
 import { colors } from "src/theme";
-import { Action, ActionTypes } from "src/store/reducers";
 
 interface DisplayerProps {
   error?: boolean;
   value: string | null | undefined;
   extraValue?: string;
   icon?: React.ReactNode;
-  dispatch: React.Dispatch<Action<string>>;
 }
 
 const Displayer: React.FC<DisplayerProps> = ({
@@ -17,18 +16,13 @@ const Displayer: React.FC<DisplayerProps> = ({
   value,
   extraValue,
   icon,
-  dispatch,
 }) => {
+  const { handleSwitchConfirmation } = React.useContext(StateContext);
+
   return (
     <Box
       sx={{ cursor: error ? "pointer" : "text" }}
-      onClick={
-        error
-          ? () => {
-              dispatch({ type: ActionTypes.SWITCH_CONFIRM });
-            }
-          : () => {}
-      }
+      onClick={error ? handleSwitchConfirmation : () => {}}
     >
       <Center>
         <IconAlertTriangle

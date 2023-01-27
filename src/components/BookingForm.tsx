@@ -9,7 +9,7 @@ import {
   OccasionIcon,
   TimeIcon,
 } from "src/components/icons";
-import { StateContext } from "src/context";
+import { StateContext } from "src/contexts";
 import { useBookingForm, useResponsiveRadioProps } from "src/hooks";
 import data from "src/data/form-data.json";
 

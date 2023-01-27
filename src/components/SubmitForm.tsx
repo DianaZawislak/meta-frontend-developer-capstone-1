@@ -16,7 +16,7 @@ import {
   TimeIcon,
 } from "src/components/icons";
 import { useBookingForm } from "src/hooks";
-import { StateContext } from "src/context";
+import { StateContext } from "src/contexts";
 import { dateFormatter } from "src/utils";
 import { colors } from "src/theme";
 

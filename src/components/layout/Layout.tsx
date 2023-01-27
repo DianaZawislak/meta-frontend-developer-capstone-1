@@ -1,7 +1,7 @@
 import * as React from "react";
 import { AppShell } from "@mantine/core";
 import { Header, Footer, Navbar } from "src/components";
-import { StateContext } from "src/context";
+import { StateContext } from "src/contexts";
 import {
   IconBuildingWarehouse,
   IconHome,

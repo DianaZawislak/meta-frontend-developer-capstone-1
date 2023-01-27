@@ -10,7 +10,7 @@ import {
   createStyles,
 } from "@mantine/core";
 import { NavLink, useLocation } from "react-router-dom";
-import { StateContext } from "src/context";
+import { StateContext } from "src/contexts";
 import { colors } from "src/theme";
 import { Link } from "./Layout";
 

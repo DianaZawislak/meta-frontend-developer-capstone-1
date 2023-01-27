@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Box, Center, Group, Text } from "@mantine/core";
 import { IconAlertTriangle } from "@tabler/icons";
-import { StateContext } from "src/context";
+import { StateContext } from "src/contexts";
 import { colors } from "src/theme";
 
 interface DisplayerProps {

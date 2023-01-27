@@ -3,7 +3,7 @@ import { Button, Center, createStyles } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { IconCheck, IconX } from "@tabler/icons";
 import { ReservationsBottom, ReservationsTop } from "src/components";
-import { StateContext } from "src/context";
+import { StateContext } from "src/contexts";
 import { BookingFormValues, useBookingForm } from "src/hooks";
 import { bookingFormValidation } from "src/validations";
 import { colors } from "src/theme";

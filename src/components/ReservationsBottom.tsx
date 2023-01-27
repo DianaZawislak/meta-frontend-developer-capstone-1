@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Container, createStyles, Grid } from "@mantine/core";
+import { Center, Container, createStyles, Grid } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
   image: {
@@ -7,6 +7,16 @@ const useStyles = createStyles((theme) => ({
     width: 300,
     objectFit: "cover",
     borderRadius: theme.radius.xl,
+    [theme.fn.smallerThan("md")]: {
+      height: 200,
+      width: 200,
+      borderRadius: theme.radius.lg,
+    },
+    [theme.fn.smallerThan("sm")]: {
+      height: 250,
+      width: "100%",
+      borderRadius: theme.radius.md,
+    },
   },
 }));
 
@@ -16,7 +26,7 @@ const ReservationsBottom: React.FC<{ images: string[] }> = ({ images }) => {
   const pictures = React.useMemo(
     () =>
       images.map((image) => (
-        <Grid.Col key={image} md={4}>
+        <Grid.Col key={image} sm={4} md={4}>
           <img src={image} className={classes.image} />
         </Grid.Col>
       )),
@@ -25,7 +35,9 @@ const ReservationsBottom: React.FC<{ images: string[] }> = ({ images }) => {
 
   return (
     <Container>
-      <Grid my="xl">{pictures}</Grid>
+      <Center>
+        <Grid my="xl">{pictures}</Grid>
+      </Center>
     </Container>
   );
 };

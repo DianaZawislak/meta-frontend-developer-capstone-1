@@ -10,7 +10,7 @@ import {
   TimeIcon,
 } from "src/components/icons";
 import { StateContext } from "src/context";
-import { useBookingForm } from "src/hooks";
+import { useBookingForm, useResponsiveRadioProps } from "src/hooks";
 import data from "src/data/form-data.json";
 
 const labelProps = {
@@ -32,6 +32,8 @@ const Chevron: React.FC<{ value: Date | string | null | undefined }> = ({
 const BookingForm = () => {
   const { availableTimes, handleUpdateTimes } = React.useContext(StateContext);
   const { useFormContext } = useBookingForm();
+  const radio = useResponsiveRadioProps();
+
   const form = useFormContext();
 
   const radios = React.useMemo(
@@ -57,14 +59,15 @@ const BookingForm = () => {
         {...form.getInputProps("seating")}
         size="sm"
         my="md"
-        spacing={240}
+        spacing={radio.spacing}
+        orientation={radio.orientation}
         sx={{ width: "100%" }}
         error={false}
       >
         {radios}
       </Radio.Group>
       <Grid my="md">
-        <Grid.Col md={6}>
+        <Grid.Col sm={6} md={6}>
           <DateField
             {...form.getInputProps("date")}
             label="Date"
@@ -81,7 +84,7 @@ const BookingForm = () => {
             rightSection={<Chevron value={form.values.date} />}
           />
         </Grid.Col>
-        <Grid.Col md={6}>
+        <Grid.Col sm={6} md={6}>
           <SelectField
             {...form.getInputProps("guests")}
             label="Number of Diners"
@@ -100,7 +103,7 @@ const BookingForm = () => {
             rightSection={<Chevron value={form.values.guests} />}
           />
         </Grid.Col>
-        <Grid.Col md={6}>
+        <Grid.Col sm={6} md={6}>
           <SelectField
             {...form.getInputProps("occasion")}
             label="Occasion"
@@ -118,7 +121,7 @@ const BookingForm = () => {
             rightSection={<Chevron value={form.values.occasion} />}
           />
         </Grid.Col>
-        <Grid.Col md={6}>
+        <Grid.Col sm={6} md={6}>
           <SelectField
             {...form.getInputProps("time")}
             label="Time"

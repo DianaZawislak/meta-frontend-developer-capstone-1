@@ -107,6 +107,11 @@ const useStyles = createStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
 
+    [theme.fn.smallerThan("md")]: {
+      paddingLeft: theme.spacing.xl * 5,
+      paddingRight: theme.spacing.xl * 5,
+    },
+
     [theme.fn.smallerThan("sm")]: {
       flexDirection: "column",
       alignItems: "center",
@@ -116,6 +121,12 @@ const useStyles = createStyles((theme) => ({
   groups: {
     display: "flex",
     flexWrap: "wrap",
+
+    [theme.fn.smallerThan("md")]: {
+      display: "flex",
+      flexDirection: "column",
+      rowGap: theme.spacing.xl,
+    },
 
     [theme.fn.smallerThan("sm")]: {
       display: "none",
@@ -160,8 +171,13 @@ const useStyles = createStyles((theme) => ({
       theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[2]
     }`,
 
+    [theme.fn.smallerThan("md")]: {
+      marginLeft: theme.spacing.xl * 5,
+    },
+
     [theme.fn.smallerThan("sm")]: {
       flexDirection: "column",
+      marginLeft: 0,
     },
   },
 
@@ -174,6 +190,7 @@ const useStyles = createStyles((theme) => ({
 
 const _Footer = () => {
   const { classes } = useStyles();
+  const date = new Date();
 
   const groups = footerLinks.map((group) => {
     const links = group.links.map((link, index) => (
@@ -206,7 +223,7 @@ const _Footer = () => {
       </Container>
       <Container className={classes.afterFooter}>
         <Text color="dimmed" size="sm">
-          © 2023 Little Lemon. All rights reserved.
+          © {date.getFullYear()} Little Lemon. All rights reserved.
         </Text>
       </Container>
     </footer>

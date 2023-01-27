@@ -6,11 +6,13 @@ export type Handlers = {
   handleUpdateTimes: (date: string) => void;
   handleSwitchConfirmation: () => void;
   handleSendData: () => void;
+  handleOpenMenu: () => void;
 };
 
 export type Store = State & Handlers;
 
-const initialState = {
+const initialState: State = {
+  openMenu: false,
   confirm: false,
   availableTimes: initializeTimes(),
   sending: false,
@@ -21,6 +23,7 @@ const StateContext = React.createContext<Store>({
   handleUpdateTimes: (_date: string) => {},
   handleSwitchConfirmation: () => {},
   handleSendData: () => {},
+  handleOpenMenu: () => {},
 });
 
 const StateContextProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -40,13 +43,19 @@ const StateContextProvider: React.FC<{ children: React.ReactNode }> = ({
     dispatch(Actions.sendData());
   };
 
-  const store = {
+  const handleOpenMenu = () => {
+    dispatch(Actions.openMenu());
+  };
+
+  const store: Store = {
+    openMenu: state.openMenu,
     availableTimes: state.availableTimes,
     confirm: state.confirm,
     sending: state.sending,
     handleUpdateTimes,
     handleSwitchConfirmation,
     handleSendData,
+    handleOpenMenu,
   };
 
   return (

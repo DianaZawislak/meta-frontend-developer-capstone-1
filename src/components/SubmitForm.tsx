@@ -8,7 +8,6 @@ import {
   Textarea,
   TextInput,
 } from "@mantine/core";
-import { colors } from "src/theme";
 import { Displayer, ErrorMessage, RadioField } from "src/components";
 import {
   DateIcon,
@@ -17,8 +16,9 @@ import {
   TimeIcon,
 } from "src/components/icons";
 import { useBookingForm } from "src/hooks";
-import { dateFormatter } from "src/utils";
 import { StateContext } from "src/context";
+import { dateFormatter } from "src/utils";
+import { colors } from "src/theme";
 
 const labelProps = {
   c: colors.light,
@@ -42,7 +42,7 @@ const SubmitForm = () => {
 
   return (
     <Grid>
-      <Grid.Col md={6}>
+      <Grid.Col sm={6} md={6}>
         <TextInput
           {...form.getInputProps("firstName")}
           placeholder="First Name"
@@ -62,7 +62,7 @@ const SubmitForm = () => {
           message="First Name Required"
         />
       </Grid.Col>
-      <Grid.Col md={6}>
+      <Grid.Col sm={6} md={6}>
         <TextInput
           {...form.getInputProps("lastName")}
           placeholder="Last Name"
@@ -82,7 +82,7 @@ const SubmitForm = () => {
           message="Last Name Required"
         />
       </Grid.Col>
-      <Grid.Col md={6}>
+      <Grid.Col sm={6} md={6}>
         <TextInput
           {...form.getInputProps("email")}
           placeholder="you@company.com"
@@ -102,7 +102,7 @@ const SubmitForm = () => {
           message="Email Required"
         />
       </Grid.Col>
-      <Grid.Col md={6}>
+      <Grid.Col sm={6} md={6}>
         <TextInput
           {...form.getInputProps("phoneNumber")}
           placeholder="###-###-####"
@@ -124,7 +124,7 @@ const SubmitForm = () => {
       </Grid.Col>
       <Grid.Col md={6}>
         <Grid>
-          <Grid.Col md={6}>
+          <Grid.Col sm={6} md={6}>
             <Displayer
               value={dateFormatter(form.values.date)}
               extraValue="Select Date"
@@ -138,7 +138,7 @@ const SubmitForm = () => {
               }
             />
           </Grid.Col>
-          <Grid.Col md={6}>
+          <Grid.Col sm={6} md={6}>
             <Displayer
               value={form.values.guests}
               extraValue="Select Diners"
@@ -152,7 +152,7 @@ const SubmitForm = () => {
               }
             />
           </Grid.Col>
-          <Grid.Col md={6}>
+          <Grid.Col sm={6} md={6}>
             <Displayer
               value={form.values.time}
               extraValue="Select Time"
@@ -166,7 +166,7 @@ const SubmitForm = () => {
               }
             />
           </Grid.Col>
-          <Grid.Col md={6}>
+          <Grid.Col sm={6} md={6}>
             <Displayer
               value={form.values.occasion}
               extraValue="Select Occasion"

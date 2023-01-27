@@ -4,6 +4,7 @@ import { colors } from "src/theme";
 const useStyles = createStyles((theme) => ({
   imageContainer: {
     position: "relative",
+
     [theme.fn.smallerThan("sm")]: {
       display: "none",
     },
@@ -20,6 +21,10 @@ const useStyles = createStyles((theme) => ({
     borderRadius: theme.radius.lg,
     boxShadow: theme.shadows.xl,
     zIndex: 2,
+    [theme.fn.smallerThan("md")]: {
+      maxWidth: 200,
+      maxHeight: 200,
+    },
   },
   backPic: {
     position: "absolute",
@@ -33,6 +38,12 @@ const useStyles = createStyles((theme) => ({
     borderRadius: theme.radius.lg,
     boxShadow: theme.shadows.xl,
     zIndex: 1,
+    [theme.fn.smallerThan("md")]: {
+      right: 100,
+      top: 70,
+      maxWidth: 200,
+      maxHeight: 200,
+    },
   },
 }));
 
@@ -43,7 +54,7 @@ const About = () => {
     <Box pt={50}>
       <Container>
         <Grid>
-          <Grid.Col md={6}>
+          <Grid.Col sm={6} md={6}>
             <Title c={colors.primary}>Little Lemon</Title>
             <Title order={3}>Chicago</Title>
             <Text my="lg" c={colors.dark}>
@@ -53,7 +64,7 @@ const About = () => {
               veritatis.
             </Text>
           </Grid.Col>
-          <Grid.Col md={6} className={classes.imageContainer}>
+          <Grid.Col sm={6} md={6} className={classes.imageContainer}>
             <img src="/mario-and-adrian-a.jpg" className={classes.frontPic} />
             <img src="/mario-and-adrian-b.jpg" className={classes.backPic} />
           </Grid.Col>

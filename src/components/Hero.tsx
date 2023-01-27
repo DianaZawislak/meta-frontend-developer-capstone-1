@@ -46,7 +46,7 @@ const Hero = () => {
     <Box py="xl" className={classes.background}>
       <Container>
         <Grid>
-          <Grid.Col md={6}>
+          <Grid.Col sm={6} md={6}>
             <Title c={colors.secondary}>Little Lemon</Title>
             <Title order={3} c={colors.light}>
               Chicago
@@ -70,7 +70,7 @@ const Hero = () => {
               Reserve a Table
             </Button>
           </Grid.Col>
-          <Grid.Col md={6} className={classes.imageContainer}>
+          <Grid.Col sm={6} md={6} className={classes.imageContainer}>
             <img src="/restaurant-food.jpg" className={classes.image} />
           </Grid.Col>
         </Grid>

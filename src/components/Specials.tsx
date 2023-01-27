@@ -26,7 +26,7 @@ const Specials = () => {
   const cards = React.useMemo(
     () =>
       specials.map((special) => (
-        <Grid.Col key={special.id} md={4}>
+        <Grid.Col key={special.id} sm={6} md={4}>
           <Card dish={special} />
         </Grid.Col>
       )),

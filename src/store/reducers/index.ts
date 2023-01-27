@@ -7,6 +7,7 @@ export type Action<T> = {
 };
 
 export type State = {
+  openMenu: boolean;
   confirm: boolean;
   availableTimes: string[];
   sending: boolean;
@@ -38,6 +39,10 @@ export const reducer = (state: State, action: Action<string>) => {
     [ActionTypes.SENDING_DATA]: {
       ...state,
       sending: true,
+    },
+    [ActionTypes.OPEN_MENU]: {
+      ...state,
+      openMenu: !state.openMenu,
     },
   };
 

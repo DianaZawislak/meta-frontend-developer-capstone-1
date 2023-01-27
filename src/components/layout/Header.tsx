@@ -9,35 +9,10 @@ import {
   Image,
   createStyles,
 } from "@mantine/core";
-import { colors } from "src/theme";
 import { NavLink, useLocation } from "react-router-dom";
-
-const navLinks = [
-  {
-    title: "Home",
-    link: "/",
-  },
-  {
-    title: "About",
-    link: "/about",
-  },
-  {
-    title: "Menu",
-    link: "/menu",
-  },
-  {
-    title: "Reservations",
-    link: "/reservations",
-  },
-  {
-    title: "Order Online",
-    link: "/order-online",
-  },
-  {
-    title: "Login",
-    link: "/login",
-  },
-];
+import { StateContext } from "src/context";
+import { colors } from "src/theme";
+import { Link } from "./Layout";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -66,10 +41,14 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const _Header = () => {
+interface HeaderProps {
+  navLinks: Link[];
+}
+
+const _Header: React.FC<HeaderProps> = ({ navLinks }) => {
   const { classes, cx } = useStyles();
   const { pathname } = useLocation();
-  const [opened, setOpened] = React.useState(false);
+  const { openMenu, handleOpenMenu } = React.useContext(StateContext);
 
   const links = React.useMemo(
     () =>
@@ -101,9 +80,9 @@ const _Header = () => {
           {links}
         </Group>
         <Burger
-          opened={opened}
+          opened={openMenu}
           className={classes.burger}
-          onClick={() => setOpened((o) => !o)}
+          onClick={handleOpenMenu}
         />
       </Container>
     </Header>

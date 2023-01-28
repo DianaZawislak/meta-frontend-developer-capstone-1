@@ -16,7 +16,7 @@ import {
   TimeIcon,
 } from "src/components/icons";
 import { useBookingForm } from "src/hooks";
-import { StateContext } from "src/context";
+import { StateContext } from "src/contexts";
 import { dateFormatter } from "src/utils";
 import { colors } from "src/theme";
 
@@ -34,152 +34,111 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+const inputs = [
+  {
+    id: "firstName",
+    placeholder: "First Name",
+    label: "* First Name",
+  },
+  {
+    id: "lastName",
+    placeholder: "Last Name",
+    label: "* Last Name",
+  },
+  {
+    id: "email",
+    placeholder: "you@company.com",
+    label: "* Email",
+  },
+  {
+    id: "phoneNumber",
+    placeholder: "###-###-####",
+    label: "* Phone Number",
+  },
+];
+
 const SubmitForm = () => {
   const { classes, cx } = useStyles();
   const { sending, handleSwitchConfirmation } = React.useContext(StateContext);
   const { useFormContext } = useBookingForm();
   const form = useFormContext();
 
-  return (
-    <Grid>
-      <Grid.Col sm={6} md={6}>
+  const displayers = [
+    {
+      label: "Date",
+      value: form.values.date,
+      icon: DateIcon,
+      isDate: true,
+    },
+    {
+      label: "Diners",
+      value: form.values.guests,
+      icon: DinersIcon,
+    },
+    {
+      label: "Time",
+      value: form.values.time,
+      icon: TimeIcon,
+    },
+    {
+      label: "Occasion",
+      value: form.values.occasion,
+      icon: OccasionIcon,
+    },
+  ];
+
+  const textInputs = React.useMemo(() => {
+    return inputs.map((input) => (
+      <Grid.Col key={input.id} sm={6} md={6}>
         <TextInput
-          {...form.getInputProps("firstName")}
-          placeholder="First Name"
-          label="* First Name"
+          {...form.getInputProps(input.id)}
+          placeholder={input.placeholder}
+          label={input.label}
           variant="filled"
           radius="md"
           labelProps={labelProps}
           error={false}
           classNames={{
             input: cx({
-              [classes.input]: !form.isValid("firstName") && sending,
+              [classes.input]: !form.isValid(input.id) && sending,
             }),
           }}
         />
         <ErrorMessage
-          condition={!form.isValid("firstName") && sending}
+          condition={!form.isValid(input.id) && sending}
           message="First Name Required"
         />
       </Grid.Col>
-      <Grid.Col sm={6} md={6}>
-        <TextInput
-          {...form.getInputProps("lastName")}
-          placeholder="Last Name"
-          label="* Last Name"
-          variant="filled"
-          radius="md"
-          labelProps={labelProps}
-          error={false}
-          classNames={{
-            input: cx({
-              [classes.input]: !form.isValid("lastName") && sending,
-            }),
-          }}
-        />
-        <ErrorMessage
-          condition={!form.isValid("lastName") && sending}
-          message="Last Name Required"
-        />
-      </Grid.Col>
-      <Grid.Col sm={6} md={6}>
-        <TextInput
-          {...form.getInputProps("email")}
-          placeholder="you@company.com"
-          label="* Email"
-          variant="filled"
-          radius="md"
-          labelProps={labelProps}
-          error={false}
-          classNames={{
-            input: cx({
-              [classes.input]: !form.isValid("email") && sending,
-            }),
-          }}
-        />
-        <ErrorMessage
-          condition={!form.isValid("email") && sending}
-          message="Email Required"
+    ));
+  }, [form, sending]);
+
+  const infoDisplayers = React.useMemo(() => {
+    return displayers.map((displayer) => (
+      <Grid.Col key={displayer.label} sm={6} md={6}>
+        <Displayer
+          value={
+            displayer.isDate ? dateFormatter(displayer.value) : displayer.value
+          }
+          extraValue={`Select ${displayer.label}`}
+          error={!displayer.value}
+          icon={
+            <displayer.icon
+              value={!displayer.value}
+              primary={colors.light}
+              secondary={colors.pink}
+            />
+          }
         />
       </Grid.Col>
-      <Grid.Col sm={6} md={6}>
-        <TextInput
-          {...form.getInputProps("phoneNumber")}
-          placeholder="###-###-####"
-          label="* Phone Number"
-          variant="filled"
-          radius="md"
-          labelProps={labelProps}
-          error={false}
-          classNames={{
-            input: cx({
-              [classes.input]: !form.isValid("phoneNumber") && sending,
-            }),
-          }}
-        />
-        <ErrorMessage
-          condition={!form.isValid("phoneNumber") && sending}
-          message="Phone Number Required"
-        />
-      </Grid.Col>
+    ));
+  }, [displayers]);
+
+  return (
+    <Grid>
+      {textInputs}
       <Grid.Col md={6}>
         <Grid>
-          <Grid.Col sm={6} md={6}>
-            <Displayer
-              value={dateFormatter(form.values.date)}
-              extraValue="Select Date"
-              error={!form.values.date}
-              icon={
-                <DateIcon
-                  value={!form.values.date}
-                  primary={colors.light}
-                  secondary={colors.pink}
-                />
-              }
-            />
-          </Grid.Col>
-          <Grid.Col sm={6} md={6}>
-            <Displayer
-              value={form.values.guests}
-              extraValue="Select Diners"
-              error={!form.values.guests}
-              icon={
-                <DinersIcon
-                  value={!form.values.guests}
-                  primary={colors.light}
-                  secondary={colors.pink}
-                />
-              }
-            />
-          </Grid.Col>
-          <Grid.Col sm={6} md={6}>
-            <Displayer
-              value={form.values.time}
-              extraValue="Select Time"
-              error={!form.values.time}
-              icon={
-                <TimeIcon
-                  value={!form.values.time}
-                  primary={colors.light}
-                  secondary={colors.pink}
-                />
-              }
-            />
-          </Grid.Col>
-          <Grid.Col sm={6} md={6}>
-            <Displayer
-              value={form.values.occasion}
-              extraValue="Select Occasion"
-              error={!form.values.occasion}
-              icon={
-                <OccasionIcon
-                  value={!form.values.occasion}
-                  primary={colors.light}
-                  secondary={colors.pink}
-                />
-              }
-            />
-          </Grid.Col>
+          {infoDisplayers}
           <Grid.Col md={12}>
             <Center>
               <Text

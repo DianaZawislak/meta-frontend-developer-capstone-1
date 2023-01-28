@@ -18,7 +18,7 @@ const initialState: State = {
   sending: false,
 };
 
-const StateContext = React.createContext<Store>({
+export const StateContext = React.createContext<Store>({
   ...initialState,
   handleUpdateTimes: (_date: string) => {},
   handleSwitchConfirmation: () => {},
@@ -63,4 +63,4 @@ const StateContextProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-export { StateContext, StateContextProvider };
+export default StateContextProvider;

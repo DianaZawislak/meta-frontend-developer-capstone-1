@@ -1,6 +1,6 @@
 import { createFormContext } from "@mantine/form";
 
-export interface BookingFormValues {
+export interface BookingFormData {
   seating: string;
   date: string;
   time: string;
@@ -15,7 +15,7 @@ export interface BookingFormValues {
 }
 
 const [FormProvider, useFormContext, useForm] =
-  createFormContext<BookingFormValues>();
+  createFormContext<BookingFormData>();
 
 const useBookingForm = () => {
   return { FormProvider, useFormContext, useForm } as const;

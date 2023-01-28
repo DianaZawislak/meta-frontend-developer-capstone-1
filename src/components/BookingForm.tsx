@@ -9,9 +9,11 @@ import {
   OccasionIcon,
   TimeIcon,
 } from "src/components/icons";
-import { StateContext } from "src/context";
-import { useBookingForm, useResponsiveRadioProps } from "src/hooks";
+import { StateContext } from "src/contexts";
+import { useBookingForm } from "src/hooks";
 import data from "src/data/form-data.json";
+
+const RADIO_SPACING = 50;
 
 const labelProps = {
   c: colors.light,
@@ -32,9 +34,47 @@ const Chevron: React.FC<{ value: Date | string | null | undefined }> = ({
 const BookingForm = () => {
   const { availableTimes, handleUpdateTimes } = React.useContext(StateContext);
   const { useFormContext } = useBookingForm();
-  const radio = useResponsiveRadioProps();
-
   const form = useFormContext();
+
+  const selects = [
+    {
+      id: "date",
+      label: "Date",
+      placeholder: "Select Date",
+      component: DateField,
+      icon: DateIcon,
+      value: form.values.date,
+    },
+    {
+      id: "guests",
+      label: "Number of Diners",
+      placeholder: "No. of Diners",
+      component: SelectField,
+      icon: DinersIcon,
+      value: form.values.guests,
+      data: data.diners,
+      grid: true,
+    },
+    {
+      id: "occasion",
+      label: "Occasion",
+      placeholder: "Occasion",
+      component: SelectField,
+      icon: OccasionIcon,
+      value: form.values.occasion,
+      data: data.occasions,
+    },
+    {
+      id: "time",
+      label: "Time",
+      placeholder: "Select Time",
+      component: SelectField,
+      icon: TimeIcon,
+      value: form.values.time,
+      data: availableTimes,
+      grid: true,
+    },
+  ];
 
   const radios = React.useMemo(
     () =>
@@ -49,6 +89,30 @@ const BookingForm = () => {
     []
   );
 
+  const selectFields = React.useMemo(() => {
+    return selects.map((select) => (
+      <Grid.Col key={select.id} sm={6} md={6}>
+        <select.component
+          {...form.getInputProps(select.id)}
+          label={select.label}
+          placeholder={select.placeholder}
+          labelProps={labelProps}
+          error={false}
+          grid={select.grid}
+          data={select.data?.length! > 0 ? select.data! : []}
+          icon={
+            <select.icon
+              value={select.value}
+              primary={colors.primary}
+              secondary={colors.light}
+            />
+          }
+          rightSection={<Chevron value={select.value} />}
+        />
+      </Grid.Col>
+    ));
+  }, [selects]);
+
   React.useEffect(() => {
     handleUpdateTimes(form.values.date);
   }, [form.values.date]);
@@ -59,88 +123,13 @@ const BookingForm = () => {
         {...form.getInputProps("seating")}
         size="sm"
         my="md"
-        spacing={radio.spacing}
-        orientation={radio.orientation}
+        spacing={RADIO_SPACING}
         sx={{ width: "100%" }}
         error={false}
       >
         {radios}
       </Radio.Group>
-      <Grid my="md">
-        <Grid.Col sm={6} md={6}>
-          <DateField
-            {...form.getInputProps("date")}
-            label="Date"
-            placeholder="Select Date"
-            labelProps={labelProps}
-            error={false}
-            icon={
-              <DateIcon
-                value={form.values.date}
-                primary={colors.primary}
-                secondary={colors.light}
-              />
-            }
-            rightSection={<Chevron value={form.values.date} />}
-          />
-        </Grid.Col>
-        <Grid.Col sm={6} md={6}>
-          <SelectField
-            {...form.getInputProps("guests")}
-            label="Number of Diners"
-            placeholder="No. of Diners"
-            grid
-            labelProps={labelProps}
-            data={data.diners}
-            error={false}
-            icon={
-              <DinersIcon
-                value={form.values.guests}
-                primary={colors.primary}
-                secondary={colors.light}
-              />
-            }
-            rightSection={<Chevron value={form.values.guests} />}
-          />
-        </Grid.Col>
-        <Grid.Col sm={6} md={6}>
-          <SelectField
-            {...form.getInputProps("occasion")}
-            label="Occasion"
-            placeholder="Occasion"
-            labelProps={labelProps}
-            data={data.occasions}
-            error={false}
-            icon={
-              <OccasionIcon
-                value={form.values.occasion}
-                primary={colors.primary}
-                secondary={colors.light}
-              />
-            }
-            rightSection={<Chevron value={form.values.occasion} />}
-          />
-        </Grid.Col>
-        <Grid.Col sm={6} md={6}>
-          <SelectField
-            {...form.getInputProps("time")}
-            label="Time"
-            placeholder="Select Time"
-            grid
-            labelProps={labelProps}
-            data={availableTimes}
-            error={false}
-            icon={
-              <TimeIcon
-                value={form.values.time}
-                primary={colors.primary}
-                secondary={colors.light}
-              />
-            }
-            rightSection={<Chevron value={form.values.time} />}
-          />
-        </Grid.Col>
-      </Grid>
+      <Grid my="md">{selectFields}</Grid>
     </>
   );
 };

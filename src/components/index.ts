@@ -17,3 +17,4 @@ export { default as RadioField } from "./RadioField";
 export { default as SubmitForm } from "./SubmitForm";
 export { default as Displayer } from "./Displayer";
 export { default as ErrorMessage } from "./ErrorMessage";
+export { default as ConfirmationButton } from "./ConfirmationButton";

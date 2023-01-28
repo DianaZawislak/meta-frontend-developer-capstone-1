@@ -2,12 +2,11 @@ import * as React from "react";
 import { Box, Container, Title } from "@mantine/core";
 import { BookingForm, SubmitForm } from "src/components";
 import { colors } from "src/theme";
+import { StateContext } from "src/contexts";
 
-interface ReservationsTopProps {
-  confirm?: boolean;
-}
+const ReservationsTop = () => {
+  const { confirm } = React.useContext(StateContext);
 
-const ReservationsTop: React.FC<ReservationsTopProps> = ({ confirm }) => {
   return (
     <Box py="md" sx={{ backgroundColor: colors.primary }}>
       <Container>

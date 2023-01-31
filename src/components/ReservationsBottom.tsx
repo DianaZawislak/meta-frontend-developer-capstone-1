@@ -35,7 +35,7 @@ const ReservationsBottom: React.FC<{ images: string[] }> = ({ images }) => {
 
   return (
     <Container>
-      <Center>
+      <Center<"section">>
         <Grid my="xl">{pictures}</Grid>
       </Center>
     </Container>

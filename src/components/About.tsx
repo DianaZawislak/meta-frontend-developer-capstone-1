@@ -51,7 +51,7 @@ const About = () => {
   const { classes } = useStyles();
 
   return (
-    <Box pt={50}>
+    <Box<"section"> pt={50}>
       <Container>
         <Grid>
           <Grid.Col sm={6} md={6}>

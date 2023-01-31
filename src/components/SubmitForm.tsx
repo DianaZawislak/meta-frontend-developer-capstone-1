@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  Box,
   Center,
   createStyles,
   Grid,
@@ -134,53 +135,58 @@ const SubmitForm = () => {
   }, [displayers]);
 
   return (
-    <Grid>
-      {textInputs}
-      <Grid.Col md={6}>
-        <Grid>
-          {infoDisplayers}
-          <Grid.Col md={12}>
-            <Center>
-              <Text
-                size="xl"
-                fw={500}
-                c={form.values.seating ? colors.light : colors.pink}
-                sx={{ cursor: !form.values.seating ? "pointer" : "text" }}
-                onClick={
-                  !form.values.seating ? handleSwitchConfirmation : () => {}
-                }
-              >
-                {form.values.seating
-                  ? `${form.values.seating} seating`
-                  : "Select Seating"}
+    <Box<"form">>
+      <Grid>
+        {textInputs}
+        <Grid.Col md={6}>
+          <Grid>
+            {infoDisplayers}
+            <Grid.Col md={12}>
+              <Center>
+                <Text
+                  size="xl"
+                  fw={500}
+                  c={form.values.seating ? colors.light : colors.pink}
+                  sx={{ cursor: !form.values.seating ? "pointer" : "text" }}
+                  onClick={
+                    !form.values.seating ? handleSwitchConfirmation : () => {}
+                  }
+                >
+                  {form.values.seating
+                    ? `${form.values.seating} seating`
+                    : "Select Seating"}
+                </Text>
+              </Center>
+            </Grid.Col>
+          </Grid>
+        </Grid.Col>
+        <Grid.Col md={6}>
+          <Textarea
+            placeholder="Comment"
+            label="Special Requests"
+            variant="filled"
+            radius="md"
+            minRows={5}
+            labelProps={labelProps}
+            {...form.getInputProps("requests")}
+          />
+        </Grid.Col>
+        <Grid.Col md={6}>
+          <Radio.Group {...form.getInputProps("accept")} error={false}>
+            <RadioField
+              value="ok"
+              invalid={!form.isValid("accept") && sending}
+            />
+            <Text c={colors.light}>
+              You agree to our friendly{" "}
+              <Text span td="underline">
+                privacy policy
               </Text>
-            </Center>
-          </Grid.Col>
-        </Grid>
-      </Grid.Col>
-      <Grid.Col md={6}>
-        <Textarea
-          placeholder="Comment"
-          label="Special Requests"
-          variant="filled"
-          radius="md"
-          minRows={5}
-          labelProps={labelProps}
-          {...form.getInputProps("requests")}
-        />
-      </Grid.Col>
-      <Grid.Col md={6}>
-        <Radio.Group {...form.getInputProps("accept")} error={false}>
-          <RadioField value="ok" invalid={!form.isValid("accept") && sending} />
-          <Text c={colors.light}>
-            You agree to our friendly{" "}
-            <Text span td="underline">
-              privacy policy
             </Text>
-          </Text>
-        </Radio.Group>
-      </Grid.Col>
-    </Grid>
+          </Radio.Group>
+        </Grid.Col>
+      </Grid>
+    </Box>
   );
 };
 

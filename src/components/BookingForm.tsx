@@ -118,7 +118,7 @@ const BookingForm = () => {
   }, [form.values.date]);
 
   return (
-    <Box<"form">>
+    <Box component="form">
       <Radio.Group
         {...form.getInputProps("seating")}
         size="sm"

@@ -135,7 +135,7 @@ const SubmitForm = () => {
   }, [displayers]);
 
   return (
-    <Box<"form">>
+    <Box component="form">
       <Grid>
         {textInputs}
         <Grid.Col md={6}>

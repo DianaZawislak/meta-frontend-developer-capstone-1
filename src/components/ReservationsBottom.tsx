@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Center, Container, createStyles, Grid } from "@mantine/core";
+import { Box, Center, Container, createStyles, Grid } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
   image: {
@@ -34,11 +34,13 @@ const ReservationsBottom: React.FC<{ images: string[] }> = ({ images }) => {
   );
 
   return (
-    <Container>
-      <Center<"section">>
-        <Grid my="xl">{pictures}</Grid>
-      </Center>
-    </Container>
+    <Box component="section">
+      <Container>
+        <Center>
+          <Grid my="xl">{pictures}</Grid>
+        </Center>
+      </Container>
+    </Box>
   );
 };
 

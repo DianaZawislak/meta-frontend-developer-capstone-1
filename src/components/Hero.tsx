@@ -43,7 +43,7 @@ const Hero = () => {
   const navigate = useNavigate();
 
   return (
-    <Box<"section"> py="xl" className={classes.background}>
+    <Box component="section" py="xl" className={classes.background}>
       <Container>
         <Grid>
           <Grid.Col sm={6} md={6}>

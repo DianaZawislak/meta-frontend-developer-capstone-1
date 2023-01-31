@@ -16,7 +16,12 @@ const Testimonials = () => {
   );
 
   return (
-    <Box<"section"> mt={50} py={100} sx={{ backgroundColor: colors.light }}>
+    <Box
+      component="section"
+      mt={50}
+      py={100}
+      sx={{ backgroundColor: colors.light }}
+    >
       <Container>
         <Center mb={100}>
           <Title>Testimonials</Title>

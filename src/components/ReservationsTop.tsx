@@ -8,7 +8,7 @@ const ReservationsTop = () => {
   const { confirm } = React.useContext(StateContext);
 
   return (
-    <Box<"section"> py="md" sx={{ backgroundColor: colors.primary }}>
+    <Box component="section" py="md" sx={{ backgroundColor: colors.primary }}>
       <Container>
         {confirm ? (
           <SubmitForm />

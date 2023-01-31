@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Grid, Radio } from "@mantine/core";
+import { Box, Grid, Radio } from "@mantine/core";
 import { IconChevronDown, IconChevronUp } from "@tabler/icons";
 import { colors } from "src/theme";
 import { DateField, SelectField, RadioField } from "src/components";
@@ -118,7 +118,7 @@ const BookingForm = () => {
   }, [form.values.date]);
 
   return (
-    <>
+    <Box component="form">
       <Radio.Group
         {...form.getInputProps("seating")}
         size="sm"
@@ -130,7 +130,7 @@ const BookingForm = () => {
         {radios}
       </Radio.Group>
       <Grid my="md">{selectFields}</Grid>
-    </>
+    </Box>
   );
 };
 

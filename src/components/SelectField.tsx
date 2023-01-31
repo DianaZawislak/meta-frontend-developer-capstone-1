@@ -55,6 +55,7 @@ const useStyles = createStyles((theme) => ({
   },
   rightSection: {
     marginRight: 20,
+    pointerEvents: "none",
   },
 }));
 

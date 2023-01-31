@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  Box,
   Button,
   Container,
   createStyles,
@@ -34,21 +35,23 @@ const Specials = () => {
   );
 
   return (
-    <Container>
-      <Group mt={120} mb={50} position="apart" noWrap>
-        <Title fs="xl">This weeks specials!</Title>
-        <Button
-          size="lg"
-          radius="lg"
-          c="dark"
-          fw="bolder"
-          className={classes.button}
-        >
-          Online Menu
-        </Button>
-      </Group>
-      <Grid gutter="xl">{cards}</Grid>
-    </Container>
+    <Box component="section">
+      <Container>
+        <Group mt={120} mb={50} position="apart" noWrap>
+          <Title fs="xl">This weeks specials!</Title>
+          <Button
+            size="lg"
+            radius="lg"
+            c="dark"
+            fw="bolder"
+            className={classes.button}
+          >
+            Online Menu
+          </Button>
+        </Group>
+        <Grid gutter="xl">{cards}</Grid>
+      </Container>
+    </Box>
   );
 };
 

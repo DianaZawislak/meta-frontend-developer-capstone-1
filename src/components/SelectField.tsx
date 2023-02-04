@@ -45,12 +45,14 @@ const useStyles = createStyles((theme) => ({
     color: colors.primary,
     borderRadius: 0,
     borderBottom: `solid 1px ${colors.primary}`,
-    borderRight: `solid 1px ${colors.primary}`,
     textAlign: "center",
     fontWeight: 600,
     "&:hover": {
       color: colors.light,
       backgroundColor: colors.primary,
+    },
+    "&:nth-child(odd)": {
+      borderRight: `solid 1px ${colors.primary}`,
     },
   },
   rightSection: {

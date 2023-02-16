@@ -10,7 +10,7 @@
 <p align="center">
     <img src="https://img.shields.io/badge/Coursera-0747a6?style=flat&logo=coursera&logoColor=white" />
     <img src="https://img.shields.io/badge/Meta-0668E1?style=flat&logo=meta&logoColor=white" />
-    <img src="https://img.shields.io/badge/React-499CB8?style=flat&logo=react&logoColor=white" />
+    <img src="https://img.shields.io/badge/React-28242c?style=flat&logo=react&logoColor=61DAFB" />
     <img src="https://img.shields.io/badge/Grading%20criteria-Passing-brightgreen" />
 </p>
 
